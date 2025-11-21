@@ -6,12 +6,17 @@
     Step 1
 */
 
+/*
+    To Do: Step 2
+    Change the graph by deleting atleast 2 nodes and adding atleast 6 nodes. Change the weights too.
+*/
+
 #include <iostream>
 #include <vector>
 #include <queue>
 using namespace std;
 
-const int SIZE = 7;
+const int SIZE = 10; // Initial size: 7
 
 struct Edge {
     int src, dest, weight;
@@ -100,9 +105,17 @@ int main() {
     // Creates a vector of graph edges/weights
     vector<Edge> edges = {
         // (x, y, w) —> edge from x to y having weight w
-        {0,1,12},{0,2,8},{0,3,21},
-        {2,3,6},{2,6,2},{5,6,6},
-        {4,5,9},{2,4,4},{2,5,5}
+        {0,1,6},{0,2,4},{3,9,3},
+        {2,3,3},{2,6,1},{5,6,3},
+        {4,5,6},{2,5,3},{4,8,6},
+        {8,5,3},{4,8,6},{3,5,7},
+        {7,1,4}
+        /*
+            Step 2 check:
+            Weights have been changed.
+            2 nodes have been removed.    
+            6 nodes have been added.
+        */
     };
 
     // Creates graph
