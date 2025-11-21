@@ -3,9 +3,14 @@
 
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 
 const int SIZE = 7;
+
+// Function prototypes
+void DFS(int start);
+void BFS(int start);
 
 struct Edge {
     int src, dest, weight;
@@ -52,7 +57,9 @@ int main() {
     // Creates a vector of graph edges/weights
     vector<Edge> edges = {
         // (x, y, w) —> edge from x to y having weight w
-        {0,1,12},{0,2,8},{0,3,21},{2,3,6},{2,6,2},{5,6,6},{4,5,9},{2,4,4},{2,5,5}
+        {0,1,12},{0,2,8},{0,3,21},
+        {2,3,6},{2,6,2},{5,6,6},
+        {4,5,9},{2,4,4},{2,5,5}
     };
 
     // Creates graph
@@ -63,8 +70,40 @@ int main() {
     
     // TO DO: Step 1
     // DFS starting from vertex 0
+    graph.DFS(0);
 
     // BFS starting from vertex 0
+    graph.BFS(0);
 
     return 0;
+}
+
+// Working on it..
+void DFS(int start) {
+    vector<bool> visited(SIZE, false);
+    cout << "DFS starting at vertex " << start << ": ";
+    
+    cout << endl;
+}
+
+// Working on it...
+void BFS(int start) {
+    vector<bool> visited(SIZE, false);
+    queue<int> q;
+
+    visited[start] = true;
+    q.push(start);
+
+    cout << "BFS starting at vertex " << start << ": ";
+
+    while (!q.empty()) {
+        int v = q.front();
+        q.pop();
+        cout << v << " ";
+
+        for (auto &edge : adjList[v]) {
+            int next = edge.first;
+            if (!visted[next])
+        }
+    }
 }
