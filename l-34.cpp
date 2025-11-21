@@ -1,6 +1,11 @@
 // COMSC-210 | Lab 34 | Annie Morales
 // IDE used: Visual Studio Code
 
+/*
+    Steps Completed:
+    Step 1
+*/
+
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -47,7 +52,6 @@ public:
             cout << endl;
         }
     }
-
     
     void DFSUntil(int v, vector<bool>& visited) {
         visited[v] = true;
@@ -62,7 +66,7 @@ public:
 
     void DFS(int start) {
         vector<bool> visited(SIZE, false);
-        cout << "DFS starting at vertex " << start << ": ";
+        cout << "DFS starting at vertex " << start << ": \n";
         DFSUntil(start, visited);
         cout << endl;
     }
@@ -74,7 +78,7 @@ public:
         visited[start] = true;
         q.push(start);
 
-        cout << "BFS starting at vertex " << start << ": ";
+        cout << "BFS starting at vertex " << start << ": \n";
 
         while (!q.empty()) {
             int v = q.front();
@@ -88,7 +92,6 @@ public:
                     q.push(next);
                 }
             }
-            cout << endl;
         }
     }
 };
@@ -108,7 +111,6 @@ int main() {
     // Prints adjacency list representation of graph
     graph.printGraph(); cout << endl;
     
-    // TO DO: Step 1
     // DFS starting from vertex 0
     graph.DFS(0);
 
