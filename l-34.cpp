@@ -8,10 +8,6 @@ using namespace std;
 
 const int SIZE = 7;
 
-// Function prototypes
-void DFS(int start);
-void BFS(int start);
-
 struct Edge {
     int src, dest, weight;
 };
@@ -51,6 +47,50 @@ public:
             cout << endl;
         }
     }
+
+    
+    void DFSUntil(int v, vector<bool>& visited) {
+        visited[v] = true;
+        cout << v << " ";
+
+        for (auto &edge : adjList[v]) {
+            int next = edge.first;
+            if (!visited[next])
+            DFSUntil(next, visited);
+        }
+    }
+
+    void DFS(int start) {
+        vector<bool> visited(SIZE, false);
+        cout << "DFS starting at vertex " << start << ": ";
+        DFSUntil(start, visited);
+        cout << endl;
+    }
+
+    void BFS(int start) {
+        vector<bool> visited(SIZE, false);
+        queue<int> q;
+
+        visited[start] = true;
+        q.push(start);
+
+        cout << "BFS starting at vertex " << start << ": ";
+
+        while (!q.empty()) {
+            int v = q.front();
+            q.pop();
+            cout << v << " ";
+
+            for (auto &edge : adjList[v]) {
+                int next = edge.first;
+                if (!visited[next]) {
+                    visited[next] = true;
+                    q.push(next);
+                }
+            }
+            cout << endl;
+        }
+    }
 };
 
 int main() {
@@ -76,34 +116,4 @@ int main() {
     graph.BFS(0);
 
     return 0;
-}
-
-// Working on it..
-void DFS(int start) {
-    vector<bool> visited(SIZE, false);
-    cout << "DFS starting at vertex " << start << ": ";
-    
-    cout << endl;
-}
-
-// Working on it...
-void BFS(int start) {
-    vector<bool> visited(SIZE, false);
-    queue<int> q;
-
-    visited[start] = true;
-    q.push(start);
-
-    cout << "BFS starting at vertex " << start << ": ";
-
-    while (!q.empty()) {
-        int v = q.front();
-        q.pop();
-        cout << v << " ";
-
-        for (auto &edge : adjList[v]) {
-            int next = edge.first;
-            if (!visted[next])
-        }
-    }
 }
