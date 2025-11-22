@@ -5,12 +5,12 @@
     Steps Completed:
     Step 1
     Step 2
+    Step 3
 */
 
 /*
-    To Do: Step 3
-    Through expert prompt engineering, wrap an application around this new graph. 
-    It should be some real-world example that is represented by your graph.
+    To Do: Step 4
+    Through prompt engineering, add code to provide the minimum spanning tree of your graph.
 */
 
 #include <iostream>
@@ -147,6 +147,39 @@ public:
             }
         }
     }
+
+    void shortestPath (int start) {
+        // Distance array
+        vector<int> dist(SIZE, INT_MAX);
+
+        // Min-priority queue (distance, nose)
+        priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
+
+        // Initial node distance = 0
+        dist[start] = 0;
+        pq.push({0, start});
+
+        while (!pq.empty()) {
+            auto [currentDist, u] = pq.top();
+            pq.pop();
+
+            for (auto &edge : adjList[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+
+                if (dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                    pq.push({dist[v], v});
+                }
+            }
+        }
+
+        cout << "Shortest path from node " << start << ":\n";
+        for (int i = 0; i < SIZE; i++) {
+            cout << start << " -> " << i << " : "
+                << (dist[i] == INT_MAX ? -1 : dist[i]) << endl;
+        }
+    }
 };
 
 int main() {
@@ -177,6 +210,9 @@ int main() {
 
     // BFS starting from vertex 0
     graph.BFSFormatted(0); cout << endl;
+
+    // Displays shortest path
+    graph.shortestPath(0);
 
     return 0;
 }
