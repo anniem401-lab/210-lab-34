@@ -16,6 +16,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
 using namespace std;
 
 const int SIZE = 10; // Initial size: 7
@@ -181,25 +182,6 @@ public:
                 }
             }
         }
-
-        // Minimum Spanning Tree
-        void minimumSpanningTree(const vector<Edge>& edges) {
-            cout << "\nMinimum Spanning Tree edges:\n";
-
-            // Sorting edges by weight
-            vector<Edge> sortedEdges = edges;
-            sort(sortedEdges.begin(), sortedEdges.end(),
-                [](Edge a, Edge b) { return a.weight < b.weight; });
-
-            DisjointSet ds(SIZE);
-
-            int edgesUsed = 0;
-
-            for (auto &edge : SortedEdges) {
-                int root1 = ds.find(edge.src);
-                int root2 = ds.find(edge.dest);
-            }
-        }
     }
 
     void shortestPath (int start) {
@@ -232,6 +214,39 @@ public:
         for (int i = 0; i < SIZE; i++) {
             cout << start << " -> " << i << " : "
                 << (dist[i] == INT_MAX ? -1 : dist[i]) << endl;
+        }
+    }
+
+    // Minimum Spanning Tree
+    void minimumSpanningTree(const vector<Edge>& edges) {
+        cout << "\nMinimum Spanning Tree edges:\n";
+
+        // Sorting edges by weight
+        vector<Edge> sortedEdges = edges;
+        sort(sortedEdges.begin(), sortedEdges.end(),
+            [](Edge a, Edge b) { return a.weight < b.weight; });
+
+        DisjointSet ds(SIZE);
+
+        int edgesUsed = 0;
+
+        // Process edges in ascending weight order
+        for (auto &edge : sortedEdges) {
+            int root1 = ds.Find(edge.src);
+            int root2 = ds.Find(edge.dest);
+                
+            if (root1 != root2) {
+                cout << "Edge from " << edge.src
+                    << " to " << edge.dest
+                    << " with travel time: " << edge.weight << " min\n";
+
+                ds.Union(root1, root2);
+                edgesUsed++;
+
+                //When MST contains SIZE-1 edges
+                if (edgesUsed == SIZE - 1 )
+                        break;
+            }
         }
     }
 };
