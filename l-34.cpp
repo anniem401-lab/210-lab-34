@@ -26,6 +26,41 @@ struct Edge {
 
 typedef pair<int, int> Pair; // Creates alias 'Pair' for the pair<int,int> data type
 
+// Disjoint Set
+class DisjointSet {
+private:
+    vector<int> parent, rank;
+
+public:
+    DisjointSet(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+
+        for (int i = 0; i < n; i++)
+        parent[i] = i;
+    }
+
+    int Find(int x) {
+        if (parent[x] != x)
+            parent[x] = Find(parent[x]);
+        return parent[x];
+    }
+
+    void Union(int x, int y) {
+        int rx = Find(x);
+        int ry = Find(y);
+
+        if (rx != ry) {
+            if (rank[rx] > rank[ry]) parent[ry] = rx;
+            else if (rank[ry] > rank[rx]) parent[rx] = ry;
+            else {
+                parent[ry] = rx;
+                rank[rx]++;
+            }
+        }
+    }
+};
+
 class Graph {
 public:
     // a vector of vectors of Pairs to represent an adjacency list
@@ -144,6 +179,25 @@ public:
                         << " (" << stopName(next)
                         << ") - " << edge.second << " min\n";
                 }
+            }
+        }
+
+        // Minimum Spanning Tree
+        void minimumSpanningTree(const vector<Edge>& edges) {
+            cout << "\nMinimum Spanning Tree edges:\n";
+
+            // Sorting edges by weight
+            vector<Edge> sortedEdges = edges;
+            sort(sortedEdges.begin(), sortedEdges.end(),
+                [](Edge a, Edge b) { return a.weight < b.weight; });
+
+            DisjointSet ds(SIZE);
+
+            int edgesUsed = 0;
+
+            for (auto &edge : SortedEdges) {
+                int root1 = ds.find(edge.src);
+                int root2 = ds.find(edge.dest);
             }
         }
     }
