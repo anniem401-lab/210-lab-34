@@ -79,7 +79,6 @@ public:
                     << " (" << stopName(edge.first)
                     << ") - Travel Time: " << edge.second << " min\n";
             }
-            cout << endl;
         }
     }
 
@@ -95,7 +94,7 @@ public:
             if (!visited[next]) {
                 cout << "  -> Can travel to Stop " << next
                     << " (" << stopName(next)
-                    << ") - " << edge.second << " min\n\n";
+                    << ") - " << edge.second << " min\n";
                 DFSFormattedUntil(next, visited);    
             }
         }
@@ -105,7 +104,7 @@ public:
     void DFSFormatted(int start) {
         vector<bool> visited(SIZE, false);
 
-        cout << "\nTransit Route Trace (DFS) from Stop "
+        cout << "Transit Route Trace (DFS) from Stop "
             << start << " (" << stopName(start) << "):\n";
         cout << "Purpose: Tracing all stops reachable during a route scan\n";
         cout << "=====================================\n";
@@ -114,25 +113,36 @@ public:
         cout << endl;
     }
 
-    void BFS(int start) {
+    // BFS formatting
+    void BFSFormatted(int start) {
         vector<bool> visited(SIZE, false);
         queue<int> q;
+
+        cout << "Layer-by-layer Transit Expansion (BFS) from Stop "
+            << start << " (" << stopName(start) << "):\n";
+        cout << "Purpose: Listing stops by increasing travel distance\n";
+        cout << "=====================================================\n";
 
         visited[start] = true;
         q.push(start);
 
-        cout << "BFS starting at vertex " << start << ": \n";
-
         while (!q.empty()) {
             int v = q.front();
             q.pop();
-            cout << v << " ";
+
+            cout << "Checking Stop " << v
+                << " (" << stopName(v) << ")\n";
 
             for (auto &edge : adjList[v]) {
                 int next = edge.first;
+
                 if (!visited[next]) {
                     visited[next] = true;
                     q.push(next);
+
+                    cout << "  -> Next stop: " << "Stop " << next
+                        << " (" << stopName(next)
+                        << ") - " << edge.second << " min\n";
                 }
             }
         }
@@ -166,7 +176,7 @@ int main() {
     graph.DFSFormatted(0);
 
     // BFS starting from vertex 0
-    graph.BFS(0);
+    graph.BFSFormatted(0); cout << endl;
 
     return 0;
 }
