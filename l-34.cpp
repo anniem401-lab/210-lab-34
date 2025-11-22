@@ -4,11 +4,13 @@
 /*
     Steps Completed:
     Step 1
+    Step 2
 */
 
 /*
-    To Do: Step 2
-    Change the graph by deleting atleast 2 nodes and adding atleast 6 nodes. Change the weights too.
+    To Do: Step 3
+    Through expert prompt engineering, wrap an application around this new graph. 
+    It should be some real-world example that is represented by your graph.
 */
 
 #include <iostream>
@@ -47,6 +49,40 @@ public:
         }
     }
 
+    // Names the nodes (Bus Route Network)
+    string stopName(int id) {
+        switch (id) {
+            case 0: return "Central Station";
+            case 1: return "Market Street";
+            case 2: return "Riverside Depot";
+            case 3: return "Hillcrest Terminal";
+            case 4: return "Oakwood Stop";
+            case 5: return "Midtown Hub";
+            case 6: return "Lakeside Stop";
+            case 7: return "University Gate";
+            case 8: return "East End Station";
+            case 9: return "Airport Shuttle Point";
+        }
+        return "Unknown Stop";
+    }
+
+    // Prints the (Bus Route Network)
+    void printTransitNetwork() {
+        cout << "\nCity Bus Route Network Overview:\n";
+        cout << "====================================\n";
+
+        for (int i = 0; i < adjList.size(); i++) {
+            cout << "Stop " << i << " (" << stopName(i) << ") connects to:\n";
+
+            for (auto &edge : adjList[i]) {
+                cout << " -> Stop " << edge.first
+                    << " (" << stopName(edge.first)
+                    << ") - Travel Time: " << edge.second << " min";
+            }
+        }
+    }
+
+    /*
     // Print the graph's adjacency list
     void printGraph() {
         cout << "\nGraph's adjacency list:" << endl;
@@ -57,6 +93,7 @@ public:
             cout << endl;
         }
     }
+    */
     
     void DFSUntil(int v, vector<bool>& visited) {
         visited[v] = true;
@@ -122,7 +159,7 @@ int main() {
     Graph graph(edges);
 
     // Prints adjacency list representation of graph
-    graph.printGraph(); cout << endl;
+    graph.printTransitNetwork(); cout << endl;
     
     // DFS starting from vertex 0
     graph.DFS(0);
