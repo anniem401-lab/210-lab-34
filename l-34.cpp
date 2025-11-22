@@ -75,41 +75,42 @@ public:
             cout << "Stop " << i << " (" << stopName(i) << ") connects to:\n";
 
             for (auto &edge : adjList[i]) {
-                cout << " -> Stop " << edge.first
+                cout << "  -> Stop " << edge.first
                     << " (" << stopName(edge.first)
-                    << ") - Travel Time: " << edge.second << " min";
+                    << ") - Travel Time: " << edge.second << " min\n";
+            }
+            cout << endl;
+        }
+    }
+
+    // Formatting
+    void DFSFormattedUntil(int v, vector<bool>& visited) {
+        visited[v] = true;
+
+        cout << "Inspecting Stop " << v
+            << " (" << stopName(v) << ")\n";
+
+        for (auto &edge : adjList[v]) {
+            int next = edge.first;
+            if (!visited[next]) {
+                cout << "  -> Can travel to Stop " << next
+                    << " (" << stopName(next)
+                    << ") - " << edge.second << " min\n\n";
+                DFSFormattedUntil(next, visited);    
             }
         }
     }
 
-    /*
-    // Print the graph's adjacency list
-    void printGraph() {
-        cout << "\nGraph's adjacency list:" << endl;
-        for (int i = 0; i < adjList.size(); i++) {
-            cout << i << " --> ";
-            for (Pair v : adjList[i])
-                cout << "(" << v.first << ", " << v.second << ") ";
-            cout << endl;
-        }
-    }
-    */
-    
-    void DFSUntil(int v, vector<bool>& visited) {
-        visited[v] = true;
-        cout << v << " ";
-
-        for (auto &edge : adjList[v]) {
-            int next = edge.first;
-            if (!visited[next])
-            DFSUntil(next, visited);
-        }
-    }
-
-    void DFS(int start) {
+    // DFS formatting
+    void DFSFormatted(int start) {
         vector<bool> visited(SIZE, false);
-        cout << "DFS starting at vertex " << start << ": \n";
-        DFSUntil(start, visited);
+
+        cout << "\nTransit Route Trace (DFS) from Stop "
+            << start << " (" << stopName(start) << "):\n";
+        cout << "Purpose: Tracing all stops reachable during a route scan\n";
+        cout << "=====================================\n";
+        
+        DFSFormattedUntil(start, visited);
         cout << endl;
     }
 
@@ -162,7 +163,7 @@ int main() {
     graph.printTransitNetwork(); cout << endl;
     
     // DFS starting from vertex 0
-    graph.DFS(0);
+    graph.DFSFormatted(0);
 
     // BFS starting from vertex 0
     graph.BFS(0);
