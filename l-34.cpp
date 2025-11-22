@@ -6,11 +6,13 @@
     Step 1
     Step 2
     Step 3
+    Step 4
+    Step 5
 */
 
 /*
-    To Do: Step 4
-    Through prompt engineering, add code to provide the minimum spanning tree of your graph.
+    To Do: Step 6
+    Place a menu in front of all this functionality.
 */
 
 #include <iostream>
@@ -282,6 +284,22 @@ int main() {
 
     // Displays shortest path
     graph.shortestPath(0);
+
+    // Minimum Spanning Tree
+    graph.minimumSpanningTree(edges);
+
+    // Menu
+    //while (choice > 0 || choice < 5)
+    int choice;
+    cout << "\nCity Bus Route Network Menu:\n";
+    cout << "[1] Display";
+    cout << "[2] Display";
+    cout << "[3] Display";
+    cout << "[4] Display";
+    cout << "[5] Display";
+    cout << "[0] Display";
+
+    if (choice = 0)
 
     return 0;
 }
