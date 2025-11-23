@@ -151,7 +151,6 @@ public:
         cout << "=====================================\n";
         
         DFSFormattedUntil(start, visited);
-        cout << endl;
     }
 
     // BFS formatting
@@ -224,7 +223,7 @@ public:
 
     // Minimum Spanning Tree
     void minimumSpanningTree(const vector<Edge>& edges) {
-        cout << "\nMinimum Spanning Tree edges:\n";
+        cout << "Minimum Spanning Tree edges:\n";
 
         // Sorting edges by weight
         vector<Edge> sortedEdges = edges;
@@ -280,16 +279,16 @@ int main() {
     //graph.printTransitNetwork(); cout << endl;
     
     // DFS starting from vertex 0
-    graph.DFSFormatted(0);
+    //graph.DFSFormatted(0);
 
     // BFS starting from vertex 0
-    graph.BFSFormatted(0); cout << endl;
+    //graph.BFSFormatted(0); cout << endl;
 
     // Displays shortest path
-    graph.shortestPath(0);
+    //graph.shortestPath(0);
 
     // Minimum Spanning Tree
-    graph.minimumSpanningTree(edges);
+    //graph.minimumSpanningTree(edges);
 
     // Menu
     int sel = main_menu();
@@ -298,25 +297,44 @@ int main() {
             case 1:
                 cout << "Displaying city bus route overview...\n";
                 graph.printTransitNetwork();
+                break;
+            case 2:
+                cout << "View of transit route trace (DFS)...\n\n";
+                graph.DFSFormatted(0);
+                break;
+            case 3:
+                cout << "View of layer-by-layer transit expanision (BFS)...\n\n";
+                graph.BFSFormatted(0);
+                break;
+            case 4:
+                cout << "Calculating shortest paths...\n\n";
+                graph.shortestPath(0);
+                break;
+            case 5:
+                cout << "Finding Minimum Spanning Tree...\n\n";
+                graph.minimumSpanningTree(edges);
+                break;
+
         }
+        sel = main_menu();
     }
     return 0;
 }
 
 int main_menu() {
         cout << "\nCity Bus Route Network Menu:\n";
-        cout << "[1] Display city bus route overview";
-        cout << "[2] View transit route trace (DFS)";
-        cout << "[3] View layer-by-layer transit expansion (BFS)";
-        cout << "[4] Calculate shortest paths";
-        cout << "[5] Find Minimum Spanning Tree";
-        cout << "[0] Exit";
+        cout << "[1] Display city bus route overview\n";
+        cout << "[2] View transit route trace (DFS)\n";
+        cout << "[3] View layer-by-layer transit expansion (BFS)\n";
+        cout << "[4] Calculate shortest paths\n";
+        cout << "[5] Find Minimum Spanning Tree\n";
+        cout << "[0] Exit\n";
         cout << "Enter your choice: ";
         int choice;
         cin >> choice; cout << endl;
         while (choice < 0 || choice > 6) {
-        cout << "Invalid, try a number between 0-5: ";
-        cin >> choice;
+            cout << "Invalid, try a number between 0-5: ";
+            cin >> choice;
         }
         return choice;
     }
