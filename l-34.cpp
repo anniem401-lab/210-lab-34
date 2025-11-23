@@ -23,6 +23,9 @@ using namespace std;
 
 const int SIZE = 10; // Initial size: 7
 
+// Function prototype
+int main_menu();
+
 struct Edge {
     int src, dest, weight;
 };
@@ -274,7 +277,7 @@ int main() {
     Graph graph(edges);
 
     // Prints adjacency list representation of graph
-    graph.printTransitNetwork(); cout << endl;
+    //graph.printTransitNetwork(); cout << endl;
     
     // DFS starting from vertex 0
     graph.DFSFormatted(0);
@@ -289,17 +292,31 @@ int main() {
     graph.minimumSpanningTree(edges);
 
     // Menu
-    //while (choice > 0 || choice < 5)
-    int choice;
-    cout << "\nCity Bus Route Network Menu:\n";
-    cout << "[1] Display";
-    cout << "[2] Display";
-    cout << "[3] Display";
-    cout << "[4] Display";
-    cout << "[5] Display";
-    cout << "[0] Display";
-
-    if (choice = 0)
-
+    int sel = main_menu();
+    while (sel != 6) {
+        switch (sel) {
+            case 1:
+                cout << "Displaying city bus route overview...\n";
+                graph.printTransitNetwork();
+        }
+    }
     return 0;
 }
+
+int main_menu() {
+        cout << "\nCity Bus Route Network Menu:\n";
+        cout << "[1] Display city bus route overview";
+        cout << "[2] View transit route trace (DFS)";
+        cout << "[3] View layer-by-layer transit expansion (BFS)";
+        cout << "[4] Calculate shortest paths";
+        cout << "[5] Find Minimum Spanning Tree";
+        cout << "[0] Exit";
+        cout << "Enter your choice: ";
+        int choice;
+        cin >> choice; cout << endl;
+        while (choice < 0 || choice > 6) {
+        cout << "Invalid, try a number between 0-5: ";
+        cin >> choice;
+        }
+        return choice;
+    }
