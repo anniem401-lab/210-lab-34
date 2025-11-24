@@ -1,20 +1,6 @@
 // COMSC-210 | Lab 34 | Annie Morales
 // IDE used: Visual Studio Code
 
-/*
-    Steps Completed:
-    Step 1
-    Step 2
-    Step 3
-    Step 4
-    Step 5
-*/
-
-/*
-    To Do: Step 6
-    Place a menu in front of all this functionality.
-*/
-
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -275,25 +261,13 @@ int main() {
     // Creates graph
     Graph graph(edges);
 
-    // Prints adjacency list representation of graph
-    //graph.printTransitNetwork(); cout << endl;
-    
-    // DFS starting from vertex 0
-    //graph.DFSFormatted(0);
-
-    // BFS starting from vertex 0
-    //graph.BFSFormatted(0); cout << endl;
-
-    // Displays shortest path
-    //graph.shortestPath(0);
-
-    // Minimum Spanning Tree
-    //graph.minimumSpanningTree(edges);
-
     // Menu
     int sel = main_menu();
     while (sel != 6) {
         switch (sel) {
+            case 0:
+                cout << "You chose to exit the program. See you next time!\n";
+                return 1;
             case 1:
                 cout << "Displaying city bus route overview...\n";
                 graph.printTransitNetwork();
@@ -314,13 +288,15 @@ int main() {
                 cout << "Finding Minimum Spanning Tree...\n\n";
                 graph.minimumSpanningTree(edges);
                 break;
-
         }
         sel = main_menu();
     }
     return 0;
 }
 
+// main_menu displays the options and allows the user to make a choice
+// arguments: none
+// returns: int of user choice
 int main_menu() {
         cout << "\nCity Bus Route Network Menu:\n";
         cout << "[1] Display city bus route overview\n";
@@ -332,7 +308,7 @@ int main_menu() {
         cout << "Enter your choice: ";
         int choice;
         cin >> choice; cout << endl;
-        while (choice < 0 || choice > 6) {
+        while (choice < 0 || choice > 5) {
             cout << "Invalid, try a number between 0-5: ";
             cin >> choice;
         }
